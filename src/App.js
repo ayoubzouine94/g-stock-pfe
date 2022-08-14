@@ -1,24 +1,43 @@
-import logo from './logo.svg';
+
+import React from 'react';
+import Navbar from './components/Navbar'
+import { BrowserRouter,Route ,Routes } from 'react-router-dom';
+import AddArticle from './pages/article/AddArticle';
+import ArticleList from './pages/article/ArticleList';
 import './App.css';
 
+import AddClient from './pages/client/AddClient';
+import ClientList from './pages/client/ClientList';
+import UpdateArticle from './pages/article/UpdateArticle';
+import Menu from './pages/Menu';
+import AddFournisseur from './pages/fournisseurs/AddFournisseur';
+import FournisseurList from './pages/fournisseurs/FournisseurList';
+
+
+
+
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+ 
+      <BrowserRouter>
+      <Navbar />
+        <Routes>
+         
+
+          
+          <Route path='/articlelist' element={  <ArticleList />}></Route>
+          <Route path='/addarticle' element={<AddArticle />}></Route>
+          <Route path='/addclient' element={<AddClient />}></Route>
+          <Route path='/clientlist' element={<ClientList />}></Route>
+         <Route path='/editarticle/:id' element={<UpdateArticle />}></Route> 
+          <Route path='/addfournisseur' element={<AddFournisseur />}></Route>
+          <Route path='/fournisseurlist' element={<FournisseurList />}></Route>
+          <Route path='/' element={<Menu />}></Route>
+        </Routes>
+      </BrowserRouter>
+           
+  
   );
 }
 
