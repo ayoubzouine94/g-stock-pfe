@@ -13,6 +13,12 @@ class FournisseurService{
     {
         return axios.delete(FOURNISSEUR_API_BASE_URL+"/"+id);
     }
+    getFournisseurById(id){
+        return axios.get(FOURNISSEUR_API_BASE_URL+"/"+id);
+    }
+    updateFournisseur(fournisseur,id){
+        return axios.put(FOURNISSEUR_API_BASE_URL+"/"+id ,fournisseur);
+    }
 
 }
 

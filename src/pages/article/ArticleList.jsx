@@ -11,7 +11,6 @@ const ArticleList = () => {
     useEffect(() => {
         const fetchData = async () => {
           setLoading(true);
-    
           try {
             const response = await ArticleService.getArticle();
             setArticles(response.data)

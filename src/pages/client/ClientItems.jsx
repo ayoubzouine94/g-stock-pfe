@@ -1,14 +1,12 @@
-import React from 'react'
+import React from 'react';
+import {useNavigate} from 'react-router-dom'
 
 const ClientItems = ({client , deleteClient}) => {
-          {/**
-           * 
-           *   idClient:"",
-      nomClient:"",
-      telClient:"",
-      emailclient:"",
-      adrClient:""
-           */}
+     const navigate = useNavigate();
+     const editClient = (e, id) => {
+          e.preventDefault();
+          navigate(`/editclient/${id}`);
+        };
   return (
     <tr>
     <td className='text-left px-6 py-4 whitespace-nowrap'>
@@ -36,6 +34,7 @@ const ClientItems = ({client , deleteClient}) => {
         
          href="!#"
          className='text-indigo-600 hover:text-indigo-800 px-4'
+         onClick={(e , id)=>editClient(e, client.idClient)}
          >Modifier
          </a>
         <a 

@@ -1,23 +1,24 @@
 import React,{useState,useEffect} from 'react'
 import { useParams ,useNavigate } from 'react-router-dom'
-import ArticleService from '../../services/ArticleService';
+import ClientService from '../../services/ClientService';
 
-const UpdateArticle = () => {
+const UpdateClient = () => {
  const { id } =   useParams();
  const navigate = useNavigate();
- const [article, setArticle] = useState(
+ const [client, setClient] = useState(
     {
         id:id,
-        descArticle:"",
-        qteArticle:"",
-        prixArticle :"",
-        idCategorie:""
+        nomClient:"",
+        telClient:"",
+        emailClient :"",
+        adrClient:""
+        //[{"idClient":40,"nomClient":"ayou","telClient":"123","emailClient":"ayoub@gmail.com","adrClient":"casa"},
     });
     useEffect(() => {
       const fetchData = async () =>{
         try {
-            const responce  = await ArticleService.getArticleById(article.id);
-            setArticle(responce.data);
+            const responce  = await ClientService.getClientById(client.id);
+            setClient(responce.data);
 
             
         } catch (error) {
@@ -26,13 +27,12 @@ const UpdateArticle = () => {
       }
       fetchData();
     }, [])
-    
-    const  updateArticle = (e ,id) =>{
+    const  updateClient = (e ,id) =>{
         e.preventDefault();
-        console.log(article);
-        ArticleService.updateArticle(article, id)
+        console.log(client);
+        ClientService.updateClient(client, id)
           .then((response) => {
-            navigate("/articlelist");
+            navigate("/clientlist");
           })
           .catch((error) => {
             console.log(error);
@@ -44,29 +44,32 @@ const UpdateArticle = () => {
 
  const handleChange = (e) =>{
     const value = e.target.value;
-    setArticle({...article, [e.target.name]: value})
+    setClient({...client, [e.target.name]: value})
 }
   return (
     <div className='flex max-w-2xl pt-10 rounded-xl mx-auto shadow-2xl border-4'>
         <div className="px-8 py-8">
             <div className="font-thin text-2xl tracking-wider">
-                <h1>Modifier Article</h1>
+                <h1>Modifier Client</h1>
             </div>
             <div className="items-center justify-center h-14 w-full my-4">
-                <label className='block text-gray-600 text-sm font-normal' htmlFor="description">Description :</label>
-                <input name='descArticle'
-                 value={article.descArticle} 
+                <label className='block text-gray-600 text-sm font-normal' htmlFor="description">Nom :</label>
+                <input name='nomClient'
+                 value={client.nomClient} 
                  placeholder="Tapez Description" 
                  type="text" 
                  className='h-10 w-96 border mt-2 px-2 py-2' 
                  onChange={(e) => handleChange(e)}
                  />
+                 {
+                    //[{"idClient":40,"nomClient":"ayou","telClient":"123","emailClient":"ayoub@gmail.com","adrClient":"casa"},
+                 }
             </div>
             <div className="items-center justify-center h-14 w-full my-4">
-                <label className='block text-gray-600 text-sm font-normal' htmlFor="unite">Unite :</label>
+                <label className='block text-gray-600 text-sm font-normal' htmlFor="unite">Telephone :</label>
                 <input
-                    name='qteArticle'
-                    value={article.qteArticle}
+                    name='telClient'
+                    value={client.telClient}
                     placeholder="Tapez L'unite"
                     type="text" 
                     className='h-10 w-96 border mt-2 px-2 py-2'
@@ -74,24 +77,24 @@ const UpdateArticle = () => {
                  />
             </div>
             <div className="items-center justify-center h-14 w-full my-4">
-                <label className='block text-gray-600 text-sm font-normal' htmlFor="prix">Prix :</label>
+                <label className='block text-gray-600 text-sm font-normal' htmlFor="prix">Email :</label>
                 <input
-                 name='prixArticle'
+                 name='emailClient'
                  type="text"
                  className='h-10 w-96 border mt-2 px-2 py-2'
-                 value={article.prixArticle}
+                 value={client.emailClient}
                  placeholder="Tapez le prix"
                  onChange={(e) => handleChange(e)}
                 />
             </div>
             <div className="items-center justify-center h-14 w-full my-4">
-                <label className='block text-gray-600 text-sm font-normal' htmlFor="prix">Numero Categorie:</label>
+                <label className='block text-gray-600 text-sm font-normal' htmlFor="prix">Adresse :</label>
                 <input
-                 name='idCategorie'
+                 name='adrClient'
                  type="text"
                  className='h-10 w-96 border mt-2 px-2 py-2'
-                 value={article.idCategorie}
-                 placeholder="Categorie"
+                 value={client.adrClient}
+                 placeholder="Adresse "
                  onChange={(e) => handleChange(e)}
                 />
             </div>
@@ -102,10 +105,10 @@ const UpdateArticle = () => {
               bg-green-400
                hover:bg-green-700
                 py-2 px-6'
-                onClick={updateArticle}>Modifier</button>
+                onClick={updateClient}>Modifier</button>
               <button
                className='rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6'
-               onClick={()=>navigate('/articlelist')}
+               onClick={()=>navigate('/clientlist')}
                >Annuler</button>
             </div>
           
@@ -114,4 +117,4 @@ const UpdateArticle = () => {
   )
 }
 
-export default UpdateArticle
+export default UpdateClient

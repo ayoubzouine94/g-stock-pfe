@@ -13,7 +13,12 @@ class ClientService{
     {
         return axios.delete(CLIENT_API_BASE_URL+"/"+id);
     }
-
+    getClientById(id){
+        return axios.get(CLIENT_API_BASE_URL+"/"+id);
+    }
+    updateClient(client,id){
+        return axios.put(CLIENT_API_BASE_URL+"/"+id ,client);
+    }
 }
 
 

@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
 
 const FournisseurItems = ({fournisseur,deleteFournisseur}) => {
-             /* nomFournisseur:"",
-        adrFournisseur:"",
-        telFournisseur:*/
+     const navigate = useNavigate();
+     const editFournisseur = (e, id) => {
+          e.preventDefault();
+          navigate(`/editfournisseur/${id}`);
+        };
   return (
     <tr>
     <td className='text-left px-6 py-4 whitespace-nowrap'>
@@ -26,6 +29,7 @@ const FournisseurItems = ({fournisseur,deleteFournisseur}) => {
         
          href="!#"
          className='text-indigo-600 hover:text-indigo-800 px-4'
+         onClick={(e , id)=>editFournisseur(e, fournisseur.idFournisseur)}
          >Modifier
          </a>
         <a 
